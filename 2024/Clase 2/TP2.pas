@@ -34,30 +34,34 @@ var
   i, contador: integer;
   nuevaOficina: lista;
 begin
-  contador := 1;
+  contador := 0;
   IO := nil;  // Inicializar la lista como vacía
-  writeln('Ingrese el código de identificación');
+  
+  writeln('Ingrese el código de identificación (o -1 para terminar):');
   readln(i);
-  while (i <> -1) AND (contador < 300) do 
+  
+  while (i <> -1) and (contador < 300) do 
   begin
     New(nuevaOficina);
     nuevaOficina^.datosOfi.codigoID := i;  // Asignar el código ingresado
-    writeln('Ingrese el DNI del propietario');
+    
+    writeln('Ingrese el DNI del propietario:');
     readln(nuevaOficina^.datosOfi.DNI);
-    writeln('Ingrese el valor de la expensa');
+    
+    writeln('Ingrese el valor de la expensa:');
     readln(nuevaOficina^.datosOfi.valorExpensa);
-    contador := contador + 1;
+    
     nuevaOficina^.sig := IO;  // El nuevo nodo apunta al nodo anterior
     IO := nuevaOficina;
     
+    contador := contador + 1;
+    
     // Leer el siguiente código de identificación
-    writeln('Ingrese el código de identificación');
+    writeln('Ingrese el código de identificación (o -1 para terminar):');
     readln(i);
   end;
 end;
 
-<<<<<<< Updated upstream
-=======
 procedure OrdenarOficinasInsercion(var IO: lista);
 var
   sorted, current, prev, next: lista;
@@ -99,6 +103,7 @@ begin
   IO := sorted;
 end;
 
+ tarea3ejercicio1tp1
 procedure OrdenarOficinasSeleccion(var IO: lista);
 var
   minNodo, current, next: lista;
@@ -132,16 +137,11 @@ begin
 end;
 
 
->>>>>>> Stashed changes
 var
   IO: lista;
 
 begin
   LeerOficinas(IO);
-<<<<<<< Updated upstream
- 
-=======
   OrdenarOficinasInsercion(IO);
   OrdenarOficinasSeleccion(IO);
->>>>>>> Stashed changes
 end.
