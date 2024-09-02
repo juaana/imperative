@@ -56,10 +56,92 @@ begin
   end;
 end;
 
+<<<<<<< Updated upstream
+=======
+procedure OrdenarOficinasInsercion(var IO: lista);
+var
+  sorted, current, prev, next: lista;
+begin
+  sorted := nil; // Inicialmente, la lista ordenada está vacía
+  
+  while IO <> nil do
+  begin
+    // Extrae el nodo actual de la lista original
+    current := IO;
+    IO := IO^.sig;
+    
+    // Inserta el nodo actual en la lista ordenada
+    if (sorted = nil) or (current^.datosOfi.codigoID < sorted^.datosOfi.codigoID) then
+    begin
+      // Insertar al principio de la lista ordenada
+      current^.sig := sorted;
+      sorted := current;
+    end
+    else
+    begin
+      // Encuentra la posición correcta para insertar el nodo
+      prev := sorted;
+      next := sorted^.sig;
+      
+      while (next <> nil) and (current^.datosOfi.codigoID >= next^.datosOfi.codigoID) do
+      begin
+        prev := next;
+        next := next^.sig;
+      end;
+      
+      // Inserta el nodo actual en la lista ordenada
+      prev^.sig := current;
+      current^.sig := next;
+    end;
+  end;
+  
+  // La lista ordenada es ahora la lista original
+  IO := sorted;
+end;
+
+procedure OrdenarOficinasSeleccion(var IO: lista);
+var
+  minNodo, current, next: lista;
+  temp: oficina;
+begin
+  while IO <> nil do
+	begin
+		current := IO;
+		minNodo := current;  // Inicializar minNodo al nodo actual
+		next := current^.sig;
+
+		// Bucle interno para encontrar el nodo con el menor codigoID
+		while next <> nil do
+			begin
+			if next^.datosOfi.codigoID < minNodo^.datosOfi.codigoID then
+				minNodo := next;
+				next := next^.sig;
+			end;
+
+		// Intercambiar los datos de current y minNodo
+		if minNodo <> current then
+		begin
+			temp := current^.datosOfi;
+			current^.datosOfi := minNodo^.datosOfi;
+			minNodo^.datosOfi := temp;
+		end;
+
+		// Avanzar current al siguiente nodo
+		IO := IO^.sig;
+	end;
+end;
+
+
+>>>>>>> Stashed changes
 var
   IO: lista;
 
 begin
   LeerOficinas(IO);
+<<<<<<< Updated upstream
  
+=======
+  OrdenarOficinasInsercion(IO);
+  OrdenarOficinasSeleccion(IO);
+>>>>>>> Stashed changes
 end.
