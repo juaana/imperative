@@ -103,10 +103,45 @@ begin
   IO := sorted;
 end;
 
+ tarea3ejercicio1tp1
+procedure OrdenarOficinasSeleccion(var IO: lista);
+var
+  minNodo, current, next: lista;
+  temp: oficina;
+begin
+  while IO <> nil do
+	begin
+		current := IO;
+		minNodo := current;  // Inicializar minNodo al nodo actual
+		next := current^.sig;
+
+		// Bucle interno para encontrar el nodo con el menor codigoID
+		while next <> nil do
+			begin
+			if next^.datosOfi.codigoID < minNodo^.datosOfi.codigoID then
+				minNodo := next;
+				next := next^.sig;
+			end;
+
+		// Intercambiar los datos de current y minNodo
+		if minNodo <> current then
+		begin
+			temp := current^.datosOfi;
+			current^.datosOfi := minNodo^.datosOfi;
+			minNodo^.datosOfi := temp;
+		end;
+
+		// Avanzar current al siguiente nodo
+		IO := IO^.sig;
+	end;
+end;
+
+
 var
   IO: lista;
 
 begin
   LeerOficinas(IO);
   OrdenarOficinasInsercion(IO);
+  OrdenarOficinasSeleccion(IO);
 end.
