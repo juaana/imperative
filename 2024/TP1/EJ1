@@ -27,6 +27,17 @@ begin
     ImprimirVectorRecursivo(v, dimL - 1); 
   writeln(v[dimL]);
 end;
+
+procedure ImprimirVector(v: vector; dimL: integer);
+var
+	i: integer;
+begin	
+  for i:= 1 to dimL do 
+	begin
+		writeln(v[i]);
+	end;
+end;
+
 var v: vector;
   dimL: integer;
 begin
@@ -37,7 +48,9 @@ begin
   if (dimL = 0) then
     writeln('--- Vector sin elementos ---')
   else begin
-    writeln('Elementos del vector:');
+    writeln('Elementos del vector impresos de forma recursiva');
     ImprimirVectorRecursivo(v, dimL); // Imprimir los elementos del vector
+    writeln('Elementos del vector impresos de forma NO recursiva ');
+    ImprimirVector(v, dimL);
   end;
 end.
