@@ -54,14 +54,30 @@ begin
 	end;	
 end;
 
+procedure maximoPorRecursion(v: vector; dimL: integer; var  maximo: integer);
+begin
+	if dimL > 0 then
+	begin
+		if v[dimL] > maximo then
+		begin
+			maximo:= v[dimL];
+			maximoPorRecursion(v, dimL-1, maximo);
+		end
+		else
+		begin
+			maximoPorRecursion(v, dimL-1 , maximo);
+		end;
+	end;
+end;
 
 var v: vector;
-  dimL, sumaPares: integer;
+  dimL, sumaPares, maximo: integer;
 begin
   randomize;
   dimL := 0; // Inicializar la cantidad de elementos en el vector
   CargarVectorRecursivo(v, dimL); // Cargar el vector
   sumaPares:= 0;
+  maximo:= 0;
 
   if (dimL = 0) then
     writeln('--- Vector sin elementos ---')
@@ -73,5 +89,8 @@ begin
     writeln('La suma de los pares es');
     sumarPares(v, dimL, sumaPares);
     writeln(sumaPares);
+    writeln('El numero mas grande del vector es');
+    maximoPorRecursion(v, dimL, maximo);
+    writeln(maximo);  
   end;
 end.
