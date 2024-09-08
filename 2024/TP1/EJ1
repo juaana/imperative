@@ -38,12 +38,30 @@ begin
 	end;
 end;
 
+procedure SumarPares(v: vector; dimL: integer; var sumaPares: integer);
+begin
+	if dimL > 0 then
+	begin
+		if (v[dimL] mod 2 = 0) then
+			begin 
+				SumarPares(v, dimL - 1 , sumaPares);
+				sumaPares:= sumaPares + v[dimL];
+			end
+		else  
+			begin
+				SumarPares(v, dimL-1, sumaPares);
+			end;
+	end;	
+end;
+
+
 var v: vector;
-  dimL: integer;
+  dimL, sumaPares: integer;
 begin
   randomize;
   dimL := 0; // Inicializar la cantidad de elementos en el vector
   CargarVectorRecursivo(v, dimL); // Cargar el vector
+  sumaPares:= 0;
 
   if (dimL = 0) then
     writeln('--- Vector sin elementos ---')
@@ -52,5 +70,8 @@ begin
     ImprimirVectorRecursivo(v, dimL); // Imprimir los elementos del vector
     writeln('Elementos del vector impresos de forma NO recursiva ');
     ImprimirVector(v, dimL);
+    writeln('La suma de los pares es');
+    sumarPares(v, dimL, sumaPares);
+    writeln(sumaPares);
   end;
 end.
